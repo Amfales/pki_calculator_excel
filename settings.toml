@@ -1,0 +1,193 @@
+
+num_years=5
+row_base=3
+col_base=2
+
+[sheets]
+  [sheets.income]
+  sheetname = "INCOME STATEMENTS"
+  prefix = "income"
+  
+    [[sheets.income.basic_kpis]]
+    name="revenue"
+    base_row=5
+    [[sheets.income.basic_kpis]]
+    name="cost_of_sales"
+    base_row=6
+    [[sheets.income.basic_kpis]]
+    name="distribution_costs"
+    base_row=9
+    [[sheets.income.basic_kpis]]
+    name="administrative_expenses"
+    base_row=10
+    [[sheets.income.basic_kpis]]
+    name="exceptional_administrative_expenses"
+    base_row=11
+    [[sheets.income.basic_kpis]]
+    name="profit_on_disposal_of_subsidiary_undertaking"
+    base_row=15
+    [[sheets.income.basic_kpis]]
+    name="loss_on_disposal_of_joint_venture_investment"
+    base_row=17
+    [[sheets.income.basic_kpis]]
+    name="provision_against_carrying_value_of_fixed_asset_investments"
+    base_row=19
+    [[sheets.income.basic_kpis]]
+    name="interest_receivable"
+    base_row=23
+    [[sheets.income.basic_kpis]]
+    name="interest_payable"
+    base_row=24
+    [[sheets.income.basic_kpis]]
+    name="taxation"
+    base_row=25
+
+    [[sheets.income.dependent_kpis]]
+    name="gross_profit"
+    dependencies=[
+      "revenue",
+      "cost_of_sales"
+    ]
+    [[sheets.income.dependent_kpis]]
+    name="operating_profit"
+    dependencies=[
+      "gross_profit",
+      "distribution_costs",
+      "administrative_expenses",
+      "exceptional_administrative_expenses"
+    ]
+    [[sheets.income.dependent_kpis]]
+    name="earnings_before_interest_and_taxes"
+    dependencies=[
+      "operating_profit",
+      "profit_on_disposal_of_subsidiary_undertaking",
+      "loss_on_disposal_of_joint_venture_investment",
+      "provision_against_carrying_value_of_fixed_asset_investments"
+    ]
+    [[sheets.income.dependent_kpis]]
+    name="net_profit"
+    dependencies=[
+      "earnings_before_interest_and_taxes",
+      "interest_receivable",
+      "interest_payable",
+      "taxation"
+    ]
+
+  [sheets.balance]
+  sheetname="BALANCE SHEETS"
+  prefix="balance"
+
+    [[sheets.balance.basic_kpis]]
+    name="cash"
+    base_row=5
+    [[sheets.balance.basic_kpis]]
+    name="current_assets_accounts_receivable"
+    base_row=6
+    [[sheets.balance.basic_kpis]]
+    name="inventory_stocks"
+    base_row=7
+    [[sheets.balance.basic_kpis]]
+    name="long_term_assets_accounts_receivable"
+    base_row=11
+    [[sheets.balance.basic_kpis]]
+    name="tangible_fixed_assets"
+    base_row=12
+    [[sheets.balance.basic_kpis]]
+    name="intangible_fixed_assets"
+    base_row=13
+    [[sheets.balance.basic_kpis]]
+    name="deferred_tax_assets"
+    base_row=14
+    [[sheets.balance.basic_kpis]]
+    name="accounts_payable"
+    base_row=20
+    [[sheets.balance.basic_kpis]]
+    name="current_loans_payable"
+    base_row=21
+    [[sheets.balance.basic_kpis]]
+    name="provisions_for_liabilities"
+    base_row=22
+    [[sheets.balance.basic_kpis]]
+    name="long_term_loans_payable"
+    base_row=26
+    [[sheets.balance.basic_kpis]]
+    name="employee_benefits"
+    base_row=27
+    [[sheets.balance.basic_kpis]]
+    name="capital_stock"
+    base_row=34
+    [[sheets.balance.basic_kpis]]
+    name="premium_on_capital_stock"
+    base_row=35
+    [[sheets.balance.basic_kpis]]
+    name="retained_earnings"
+    base_row=36
+    [[sheets.balance.basic_kpis]]
+    name="prior_year_adjustment"
+    base_row=37
+
+    [[sheets.balance.dependent_kpis]]
+    name="current_assets"
+    dependencies=[
+      "cash",
+      "current_assets_accounts_receivable",
+      "inventory_stocks"
+    ]
+    [[sheets.balance.dependent_kpis]]
+    name="long_term_assets"
+    dependencies=[
+      "long_term_assets_accounts_receivable",
+      "tangible_fixed_assets",
+      "intangible_fixed_assets",
+      "deferred_tax_assets"
+    ]
+    [[sheets.balance.dependent_kpis]]
+    name="total_assets"
+    dependencies=[
+      "current_assets",
+      "long_term_assets"
+    ]
+    [[sheets.balance.dependent_kpis]]
+    name="current_liabilities"
+    dependencies=[
+      "accounts_payable",
+      "current_loans_payable",
+      "provisions_for_liabilities"
+    ]
+    [[sheets.balance.dependent_kpis]]
+    name="long_term_liabilities"
+    dependencies=[
+      "long_term_loans_payable",
+      "employee_benefits"
+    ]
+    [[sheets.balance.dependent_kpis]]
+    name="total_liabilities"
+    dependencies=[
+      "current_liabilities",
+      "long_term_liabilities"
+    ]
+    [[sheets.balance.dependent_kpis]]
+    name="total_equity"
+    dependencies=[
+      "capital_stock",
+      "premium_on_capital_stock",
+      "retained_earnings",
+      "prior_year_adjustment",
+      "net_profit"
+    ]
+    [[sheets.balance.dependent_kpis]]
+    name="total_liabilities_and_equity"
+    dependencies=[
+      "total_liabilities",
+      "total_equity"
+    ]
+    [[sheets.balance.dependent_kpis]]
+    name="variance"
+    dependencies=[
+      "total_assets",
+      "total_liabilities_and_equity"
+    ]
+
+
+
+
